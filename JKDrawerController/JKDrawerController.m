@@ -1190,6 +1190,9 @@ static inline CGFloat __originXForDrawerOriginAndTargetOriginOffset(CGFloat orig
             // Pan to right -> show left
             if (translatedPoint.x > 0)
             {
+                if (!_leftViewController) {
+                    return;
+                }
                 targetFrame = [self hiddenDrawerFrameForSide:(JKDrawerSideLeft)];
                 targetFrame.origin.x += translatedPoint.x;
                 targetFrame.origin.x = MIN([self visibleDrawerFrameForSide:(JKDrawerSideLeft)].origin.x, targetFrame.origin.x);
@@ -1199,6 +1202,9 @@ static inline CGFloat __originXForDrawerOriginAndTargetOriginOffset(CGFloat orig
             // Pan to left -> show right
             else if(translatedPoint.x < 0)
             {
+                if (!_rightViewController) {
+                    return;
+                }
                 targetFrame = [self hiddenDrawerFrameForSide:(JKDrawerSideRight)];
                 targetFrame.origin.x += translatedPoint.x;
                 targetFrame.origin.x = MAX(targetFrame.origin.x, [self visibleDrawerFrameForSide:(JKDrawerSideRight)].origin.x);
@@ -1207,8 +1213,8 @@ static inline CGFloat __originXForDrawerOriginAndTargetOriginOffset(CGFloat orig
             }
             else
             {
-                [_rightViewController.view setFrame:[self hiddenDrawerFrameForSide:(JKDrawerSideRight)]];
-                [_leftViewController.view setFrame:[self hiddenDrawerFrameForSide:(JKDrawerSideLeft)]];
+//                [_rightViewController.view setFrame:[self hiddenDrawerFrameForSide:(JKDrawerSideRight)]];
+//                [_leftViewController.view setFrame:[self hiddenDrawerFrameForSide:(JKDrawerSideLeft)]];
             }
             
             break;
